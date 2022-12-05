@@ -21,6 +21,9 @@ const MainNavigation = React.memo(function MainNavigation() {
           <li>
             <Link href="/contact">Contact</Link>
           </li>
+          <li>
+            <Link href="/account">Account</Link>
+          </li>
         </ul>
       </nav>
     </header>

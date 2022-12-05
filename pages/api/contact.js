@@ -4,14 +4,7 @@ async function handler(req, res) {
   if (req.method === "POST") {
     const { email, name, message } = req.body;
 
-    if (
-      !email ||
-      !email.includes("@") ||
-      !name ||
-      name.trim() === "" ||
-      !message ||
-      message.trim() === ""
-    ) {
+    if (!email || !email.includes("@") || !name || name.trim() === "" || !message || message.trim() === "") {
       res.status(500).json({ message: "Invalid input." });
       return;
     }
@@ -29,6 +22,7 @@ async function handler(req, res) {
     try {
       client = await MongoClient.connect(connectionString);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Could not connect to database." });
       return;
     }
@@ -46,9 +40,7 @@ async function handler(req, res) {
 
     client.close();
 
-    res
-      .status(201)
-      .json({ message: "Successfully stored message!", data: newMessage });
+    res.status(201).json({ message: "Successfully stored message!", data: newMessage });
   }
 }
 
